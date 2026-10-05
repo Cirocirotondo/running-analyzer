@@ -1,0 +1,3 @@
+# Admins see Videos only with Improvement Consent
+
+During the beta, looking at real Videos (especially those that failed) is the fastest way to improve the pipeline, but Videos are personal data. An Admin can therefore open a Session's Videos only if the Runner gave Improvement Consent for that Session, an optional checkbox at upload; without it the Admin sees only metadata and the failure reason. Access is limited to the beta and is declared in the privacy notice. The beta is also restricted to adults, so no parental consent flow is needed until public launch (GDPR art. 8 thresholds range from 13 to 16 depending on the country of residence).

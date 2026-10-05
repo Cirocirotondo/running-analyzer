@@ -1,0 +1,45 @@
+[project]
+name = "running-analyzer-worker"
+version = "0.1.0"
+description = "Queue consumer that runs the pose-estimation pipeline on uploaded videos"
+requires-python = ">=3.12"
+dependencies = [
+    # pipeline (same as prototype/, CPU build of ONNX Runtime)
+    "numpy",
+    "scipy",
+    "opencv-python-headless",
+    "rtmlib",
+    "onnxruntime",
+    "pandas",
+    "pyarrow",
+    "matplotlib",
+    # platform
+    "rq",
+    "redis",
+    "boto3",
+    "sqlalchemy",
+    "psycopg[binary]",
+    "pydantic-settings",
+    "pydantic[email]",
+    "fastapi",
+    "pyjwt",
+    "httpx",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# The worker runs with the prototype pipeline and the API models on the path (see the Dockerfiles).
+pythonpath = [".", "../prototype", "../api/src"]
+markers = [
+    "slow: needs a real video and the pose model (run locally: pytest -m slow)",
+    "browser: needs Node and Playwright (skipped where they are missing, e.g. CI)",
+]
+addopts = "-m 'not slow'"

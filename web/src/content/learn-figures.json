@@ -1,0 +1,77 @@
+{
+  "cadence": {
+    "width": 848,
+    "height": 525,
+    "version": "0bcde5b22d"
+  },
+  "contact-time": {
+    "width": 848,
+    "height": 494,
+    "version": "481fda7b0d"
+  },
+  "flight-time": {
+    "width": 848,
+    "height": 494,
+    "version": "7d00cde5b9"
+  },
+  "foot-angle": {
+    "width": 720,
+    "height": 575,
+    "version": "3a67034300"
+  },
+  "gait-cycle": {
+    "width": 848,
+    "height": 1362,
+    "version": "544f5e4967"
+  },
+  "hip-adduction": {
+    "width": 720,
+    "height": 847,
+    "version": "3b13e0a59e"
+  },
+  "hip-adduction-pelvis": {
+    "width": 720,
+    "height": 847,
+    "version": "87174949cb"
+  },
+  "knee-flexion": {
+    "width": 720,
+    "height": 900,
+    "version": "dc4a7f742c"
+  },
+  "overstride": {
+    "width": 720,
+    "height": 899,
+    "version": "c7f887650c"
+  },
+  "pelvic-drop": {
+    "width": 720,
+    "height": 847,
+    "version": "4bebc8dfd6"
+  },
+  "raw-vs-filtered": {
+    "width": 728,
+    "height": 359,
+    "version": "ddb1f87d07"
+  },
+  "thigh-angle": {
+    "width": 848,
+    "height": 525,
+    "version": "9b3da7d4a5"
+  },
+  "tibia-angle": {
+    "width": 720,
+    "height": 900,
+    "version": "b8f85d3c6a"
+  },
+  "trunk-lean": {
+    "width": 720,
+    "height": 899,
+    "version": "21b35d32e7"
+  },
+  "vertical-oscillation": {
+    "width": 848,
+    "height": 524,
+    "version": "d1ff7dbd7c"
+  }
+}

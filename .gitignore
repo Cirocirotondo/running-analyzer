@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local data: videos and pipeline outputs
+data/
+*.mp4
+*.mov
+*.avi
+*.MOV
+*.MP4
+
+# Downloaded model weights
+prototype/models/
+
+# Simone's own test videos
+videos/

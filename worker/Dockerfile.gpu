@@ -1,0 +1,20 @@
+# GPU variant of the worker for local development (NVIDIA via Docker's GPU passthrough).
+# Same code as Dockerfile; only the ONNX Runtime build and the CUDA libraries differ.
+# Build context is the repository root.
+FROM python:3.12-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy PYTHONPATH=/app:/app/api_src:/app/prototype PIPELINE_DEVICE=cuda
+# rtmlib declares the CPU onnxruntime as a dependency, which would shadow the GPU build: install it
+# without dependencies and list what it actually needs. CUDA 13 runtime libraries come from pip.
+RUN uv venv /app/.venv && uv pip install --python /app/.venv/bin/python \
+    numpy scipy opencv-python-headless pandas pyarrow matplotlib tqdm \
+    onnxruntime-gpu nvidia-cublas nvidia-cudnn-cu13 nvidia-cuda-runtime nvidia-cufft nvidia-curand nvidia-cuda-nvrtc nvidia-nvjitlink \
+    rq redis boto3 sqlalchemy "psycopg[binary]" pydantic-settings "pydantic[email]" fastapi pyjwt httpx \
+    && uv pip install --python /app/.venv/bin/python --no-deps rtmlib
+COPY api/src ./api_src
+COPY prototype/analyze.py prototype/analyze_rear.py ./prototype/
+COPY worker/worker ./worker
+RUN /app/.venv/bin/python -c "from rtmlib import BodyWithFeet; [BodyWithFeet(mode=m, backend='onnxruntime', device='cpu') for m in ('performance', 'balanced')]"
+CMD ["/app/.venv/bin/rq", "worker", "analysis", "--url", "redis://redis:6379/0"]
